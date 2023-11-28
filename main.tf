@@ -27,7 +27,13 @@ module "s3_for_athena_query_result" {
     aws_s3_bucket_name= var.aws_s3_storage_athena_q_result
     create_bucket_policy = false
 }
-
+# create Athena workgroup
+module "athena_workgroup" {
+    source = "./athena"
+    athena_workgroup_name = "Grafana"
+    athena_query_result_bucket = var.aws_s3_storage_athena_q_result
+    
+}
 module "cloud_formation_stack"{
     source = "./cloud_formation_stack"
 }
